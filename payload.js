@@ -48,19 +48,32 @@ async function sendDataToEndpoint(email, device_id, host) {
         console.error('Error:', error);
     }
 }
+
 async function main() {
-    if (window.location.search.includes("logout=true")) {
-        document.write("<h1>You have been logged out</h1>");
+    const queryParam = window.location.search;
+
+    if (queryParam.includes("logout=true")) {
+        displayMessage("You have been logged out");
     } else {
         const email = getEmailQueryParam();
-        const device_id = await getDeviceId();
+        const deviceId = await getDeviceId();
         const host = getHostname();
-        document.write("<h1>You are viewing content as " + getEmailQueryParam() + "</h1>"
-                        + "<h2>Your device id is " + device_id + "</h2>"
-                        + "<h2>Your host is " + host + "</h2>"
-                        + "<h2>Click <a href='?logout=true'>here</a> to logout</h2>");
-        sendDataToEndpoint(email, device_id, host);
+        const htmlContent = `
+            <h1>You are viewing content as ${email}</h1>
+            <h2>Your device id is ${deviceId}</h2>
+            <h2>Your host is ${host}</h2>
+            <h2>Click <a href='?logout=true'>here</a> to logout</h2>
+        `;
+
+        document.write(htmlContent);
+        sendDataToEndpoint(email, deviceId, host);
     }
-    // setInterval(sendDataToEndpoint, 10000);// this runs every 10 seconds
+
+    // setInterval(sendDataToEndpoint, 10000);
 }
+
+function displayMessage(message) {
+    document.write(`<h1>${message}</h1>`);
+}
+
 main();
