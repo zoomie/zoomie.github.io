@@ -9,16 +9,22 @@ function getEmailQueryParam() {
 }
 
 async function getDeviceId() {
-    // if device id is in query params then return that
     const params = new URLSearchParams(window.location.search);
     device_id = params.get('device_id');
     if (device_id != null){
         return device_id
     }
-    const FingerprintJS = await import('https://openfpcdn.io/fingerprintjs/v4');
-    const fp = await FingerprintJS.load();
-    const result = await fp.get();
-    return result.visitorId;
+    if (localStorage.getItem('fernDeviceId') != null) {
+        return localStorage.getItem('fernDeviceId');
+    } else {
+        const FingerprintJS = await import('https://openfpcdn.io/fingerprintjs/v4');
+        const fp = await FingerprintJS.load();
+        const result = await fp.get();
+        deviceId = result.visitorId;
+        localStorage.setItem('fernDeviceId', deviceId);
+        return deviceId;
+    }
+
 }
 
 function getHostname() {
@@ -93,13 +99,12 @@ async function main() {
     displayDemoSiteData(email, deviceId, host);
     result = await sendDataToEndpoint(email, deviceId, host);
     if (result.popup) {
-        session_count = result.session_count;
-        ip = result.ip;
-        displayPopup(
-            `There are currently ${session_count} devices viewing this content. 
-            Your IP address is ${ip}. 
-            Please create your own account.`
-        );
+        // add a breakpoint between lines
+        let message = `You have ${result.session_count} devices and the limit is ${result.max_devices}.
+        Please create your own account or change your password.
+        Your IP address is ${result.ip}.`;
+
+        displayPopup(message)
     }
 }
 
