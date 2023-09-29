@@ -38,79 +38,69 @@ async function sendDataToEndpoint(email, device_id, host) {
 
         const result = await response.json();
         console.log(result);
+        return result;
 
-        if (result.redirect) {
-            window.location.href = result.url;
-        }
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-async function main() {
-    const queryParam = window.location.search;
-    debugger;
-
-    if (queryParam.includes("logout=true")) {
-        displayMessage("You have been logged out");
-        return
-    }
-    if (queryParam.includes("popup=true")) {
-        displayPopup("It looks like you are sharing your password with a friend. Please create a new account.")
-        return
-    }
-    const email = getEmailQueryParam();
-    const deviceId = await getDeviceId();
-    const host = getHostname();
+function displayDemoSiteData(email, deviceId, host) {
     const htmlContent = `
         <h1>You are viewing content as ${email}</h1>
         <h2>Your device id is ${deviceId}</h2>
         <h2>Your host is ${host}</h2>
-        <h2>Click <a href='?logout=true'>here</a> to logout</h2>
     `;
-
-    document.write(htmlContent);
-    sendDataToEndpoint(email, deviceId, host);
-
-    // setInterval(sendDataToEndpoint, 10000);
-    
-}
-
-function displayMessage(message) {
-    document.write(`<h1>${message}</h1>`);
+    document.body.innerHTML = htmlContent;
 }
 
 function displayPopup(message) {
-    const popup = document.createElement("div");
-    popup.style.position = "fixed";
-    popup.style.bottom = "0";
-    popup.style.left = "0";
-    popup.style.width = "100%";
-    popup.style.backgroundColor = "red";
-    popup.style.color = "white";
-    popup.style.padding = "10px";
-    popup.style.textAlign = "center";
-    popup.innerHTML = message;
-    document.body.appendChild(popup);
-    // exit button
-    const exitButton = document.createElement("button");
-    exitButton.innerHTML = "Exit";
-    exitButton.style.position = "absolute";
-    exitButton.style.top = "0";
-    exitButton.style.right = "0";
-    exitButton.style.padding = "10px";
-    exitButton.style.backgroundColor = "white";
-    exitButton.style.color = "red";
-    exitButton.style.border = "none";
-    exitButton.style.cursor = "pointer";
-    exitButton.style.fontSize = "16px";
-    exitButton.style.fontWeight = "bold";
-    exitButton.style.outline = "none";
-    exitButton.onclick = function() {
-        popup.style.display = "none";
-    }
-    popup.appendChild(exitButton);
+    // Create the popup container
+    var popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.bottom = '20px';
+    popup.style.right = '20px';
+    popup.style.width = '300px';
+    popup.style.padding = '20px';
+    popup.style.backgroundColor = '#ffffff';
+    popup.style.border = '1px solid #000';
+    popup.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2)';
+    popup.style.borderRadius = '5px';
+    popup.style.overflow = 'hidden';
+    
+    // Add message to popup
+    var messageElem = document.createElement('p');
+    messageElem.textContent = message;
+    popup.appendChild(messageElem);
 
+    // Create close button
+    var closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.style.marginTop = '10px';
+    closeButton.onclick = function() {
+        document.body.removeChild(popup);
+    };
+    popup.appendChild(closeButton);
+
+    // Append popup to body
+    document.body.appendChild(popup);
 }
-debugger;
+
+async function main() {
+    const email = getEmailQueryParam();
+    const deviceId = await getDeviceId();
+    const host = getHostname();
+    displayDemoSiteData(email, deviceId, host);
+    result = await sendDataToEndpoint(email, deviceId, host);
+    if (result.popup) {
+        session_count = result.session_count;
+        ip = result.ip;
+        displayPopup(
+            `There are currently ${session_count} devices viewing this content. 
+            Your IP address is ${ip}. 
+            Please create your own account.`
+        );
+    }
+}
+
 main();
