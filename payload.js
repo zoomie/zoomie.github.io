@@ -99,11 +99,10 @@ async function main() {
     displayDemoSiteData(email, deviceId, host);
     result = await sendDataToEndpoint(email, deviceId, host);
     if (result.popup) {
-        // add a breakpoint between lines
-        let message = `You have ${result.session_count} devices and the limit is ${result.max_devices}.
-        Please create your own account or change your password.
-        Your IP address is ${result.ip}.`;
-
+        let message = `
+        It looks like you are sharing your password, please not that this is against our terms of service.
+        You have ${result.session_count} devices and the limit is ${result.max_devices}.
+        `
         displayPopup(message)
     }
 }
