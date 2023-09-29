@@ -101,6 +101,7 @@ async function main() {
     if (result.popup) {
         let message = `
         It looks like you are sharing your password, please not that this is against our terms of service.
+        Please create a new account here https://example.app/signup or change your password.
         You have ${result.session_count} devices and the limit is ${result.max_devices}.
         `
         displayPopup(message)
