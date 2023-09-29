@@ -49,6 +49,7 @@ async function sendDataToEndpoint(email, device_id, host) {
 
 async function main() {
     const queryParam = window.location.search;
+    debugger;
 
     if (queryParam.includes("logout=true")) {
         displayMessage("You have been logged out");
@@ -111,5 +112,5 @@ function displayPopup(message) {
     popup.appendChild(exitButton);
 
 }
-
+debugger;
 main();
