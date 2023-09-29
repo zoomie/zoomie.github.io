@@ -52,22 +52,25 @@ async function main() {
 
     if (queryParam.includes("logout=true")) {
         displayMessage("You have been logged out");
-    } else if (queryParam.includes("popup=true")) {
-        displayPopup("It looks like you are sharing your password with a friend. Please create a new account.")
-    } else {
-        const email = getEmailQueryParam();
-        const deviceId = await getDeviceId();
-        const host = getHostname();
-        const htmlContent = `
-            <h1>You are viewing content as ${email}</h1>
-            <h2>Your device id is ${deviceId}</h2>
-            <h2>Your host is ${host}</h2>
-            <h2>Click <a href='?logout=true'>here</a> to logout</h2>
-        `;
-
-        document.write(htmlContent);
-        sendDataToEndpoint(email, deviceId, host);
+        return
     }
+    if (queryParam.includes("popup=true")) {
+        displayPopup("It looks like you are sharing your password with a friend. Please create a new account.")
+        return
+    }
+    const email = getEmailQueryParam();
+    const deviceId = await getDeviceId();
+    const host = getHostname();
+    const htmlContent = `
+        <h1>You are viewing content as ${email}</h1>
+        <h2>Your device id is ${deviceId}</h2>
+        <h2>Your host is ${host}</h2>
+        <h2>Click <a href='?logout=true'>here</a> to logout</h2>
+    `;
+
+    document.write(htmlContent);
+    sendDataToEndpoint(email, deviceId, host);
+
     // setInterval(sendDataToEndpoint, 10000);
     
 }
