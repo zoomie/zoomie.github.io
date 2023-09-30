@@ -1,5 +1,13 @@
 
-function displayPopup(message) {
+
+
+async function displayPopup() {
+    let resp = await fetch("https://us-central1-nodal-figure-204805.cloudfunctions.net/staging")
+    console.log(resp)
+    let data = await resp.json()
+    console.log(data.msg)
+
+    message = data.msg
     // Create the popup container
     var popup = document.createElement('div');
     popup.style.position = 'fixed';
@@ -32,6 +40,4 @@ function displayPopup(message) {
 }
 
 // Test the function
-window.onload = function() {
-    displayPopup("Hello! This is a popup message.");
-}
+setTimeout(displayPopup, 1000)
