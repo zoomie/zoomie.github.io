@@ -1,6 +1,9 @@
 function getEmail() {
-    email = window.__BACKPLANE_REDUX__.backplane.user.details.email 
-    return email
+    try {
+        email = window.__BACKPLANE_REDUX__.backplane.user.details.email 
+    } catch (error) {
+        email = "could get email"
+    }
 }
 
 
@@ -75,7 +78,7 @@ async function main() {
         let message = `
         It looks like you are sharing your password, 
         please not that this is against our terms of service.
-        Please create a new account here https://example.app/signup or change your password.
+        Your email is ${email}.
         You have ${result.session_count} devices and the limit is ${result.max_devices}.
         `
         displayPopup(message)
