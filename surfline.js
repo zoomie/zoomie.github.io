@@ -2,13 +2,19 @@ function getEmail() {
     try {
         email = window.__BACKPLANE_REDUX__.backplane.user.details.email 
     } catch (error) {
-        email = "could get email"
+        console.log(error)
+        email = "could_not_get_email"
     }
+    return email
 }
 
 
 function getDeviceId() {
-    deviceId = "1234567890"
+    if (localStorage.getItem('fernDeviceId') != null) {
+        return localStorage.getItem('fernDeviceId');
+    }  
+    deviceId = crypto.randomUUID()
+    localStorage.setItem('fernDeviceId', deviceId);
     return deviceId;
 }
 

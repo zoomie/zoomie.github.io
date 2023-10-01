@@ -1,4 +1,4 @@
-function getEmailQueryParam() {
+function getEmail() {
     const params = new URLSearchParams(window.location.search);
     email = params.get('email');
     if (email == null){
@@ -16,15 +16,19 @@ async function getDeviceId() {
     }
     if (localStorage.getItem('fernDeviceId') != null) {
         return localStorage.getItem('fernDeviceId');
-    } else {
+    }  
+    try {
         const FingerprintJS = await import('https://openfpcdn.io/fingerprintjs/v4');
         const fp = await FingerprintJS.load();
         const result = await fp.get();
         deviceId = result.visitorId;
-        localStorage.setItem('fernDeviceId', deviceId);
-        return deviceId;
-    }
+    } catch (error) {
+        console.log(error);
+        deviceId = crypto.randomUUID()
 
+    }
+    localStorage.setItem('fernDeviceId', deviceId);
+    return deviceId;
 }
 
 function getHostname() {
@@ -93,7 +97,7 @@ function displayPopup(message) {
 }
 
 async function main() {
-    const email = getEmailQueryParam();
+    const email = getEmail();
     const deviceId = await getDeviceId();
     const host = getHostname();
     displayDemoSiteData(email, deviceId, host);
