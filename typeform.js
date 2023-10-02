@@ -1,32 +1,33 @@
-function getEmail() {
-    const params = new URLSearchParams(window.location.search);
-    email = params.get('email');
-    if (email == null){
-        return "test@email.com"
-    } else {
-        return email
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Check if the cookie starts with the desired name
+        if (cookie.startsWith(name + '=')) {
+            // Return the value of the cookie
+            return cookie.substring(name.length + 1);
+        }
     }
+    // If the cookie is not found, return null or an appropriate default value
+    return null;
 }
 
-async function getDeviceId() {
-    const params = new URLSearchParams(window.location.search);
-    device_id = params.get('device_id');
-    if (device_id != null){
-        return device_id
+function getEmail() {
+    try {
+        email = getCookie('tf_email') 
+    } catch (error) {
+        console.log(error)
+        email = "could_not_get_email"
     }
+    return email
+}
+
+
+function getDeviceId() {
     if (localStorage.getItem('fernDeviceId') != null) {
         return localStorage.getItem('fernDeviceId');
     }  
-    try {
-        const FingerprintJS = await import('https://openfpcdn.io/fingerprintjs/v4');
-        const fp = await FingerprintJS.load();
-        const result = await fp.get();
-        deviceId = result.visitorId;
-    } catch (error) {
-        console.log(error);
-        deviceId = crypto.randomUUID()
-
-    }
+    deviceId = crypto.randomUUID()
     localStorage.setItem('fernDeviceId', deviceId);
     return deviceId;
 }
@@ -55,14 +56,6 @@ async function sendDataToEndpoint(email, device_id, host) {
     }
 }
 
-function displayDemoSiteData(email, deviceId, host) {
-    const htmlContent = `
-        <h1>You are viewing content as ${email}</h1>
-        <h2>Your device id is ${deviceId}</h2>
-        <h2>Your host is ${host}</h2>
-    `;
-    document.body.innerHTML = htmlContent;
-}
 
 function displayPopup(message) {
     // Create the popup container
@@ -97,19 +90,19 @@ function displayPopup(message) {
 }
 
 async function main() {
-    const email = getEmail();
-    const deviceId = await getDeviceId();
-    const host = getHostname();
-    displayDemoSiteData(email, deviceId, host);
-    result = await sendDataToEndpoint(email, deviceId, host);
+    let email = getEmail();
+    let deviceId = getDeviceId();
+    let host = getHostname();
+    let result = await sendDataToEndpoint(email, deviceId, host);
     if (result.popup) {
         let message = `
-        It looks like you are sharing your password, please not that this is against our terms of service.
-        Please create a new account here https://example.app/signup or change your password.
+        It looks like you are sharing your password, 
+        please not that this is against our terms of service.
+        Your email is ${email}.
         You have ${result.session_count} devices and the limit is ${result.max_devices}.
         `
         displayPopup(message)
     }
 }
-
-main();
+// Test the function
+setTimeout(main, 1000)
