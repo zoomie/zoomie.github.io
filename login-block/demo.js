@@ -8,26 +8,21 @@ function getEmail() {
     }
 }
 
-async function getDeviceId() {
+async function getDeviceIdFirstSeen() {
     const params = new URLSearchParams(window.location.search);
     device_id = params.get('device_id');
     if (device_id != null){
         return device_id
     }
-    if (localStorage.getItem('fernDeviceId') != null) {
-        return localStorage.getItem('fernDeviceId');
+    
+    if (localStorage.getItem('fernDeviceId') != null && 
+        localStorage.getItem('fernFirstSeen') != null) {
+        return localStorage.getItem('fernDeviceId'), localStorage.getItem('fernFirstSeen');
     }  
-    try {
-        const FingerprintJS = await import('https://openfpcdn.io/fingerprintjs/v4');
-        const fp = await FingerprintJS.load();
-        const result = await fp.get();
-        deviceId = result.visitorId;
-    } catch (error) {
-        console.log(error);
-        deviceId = crypto.randomUUID()
-
-    }
+    deviceId = crypto.randomUUID()
     localStorage.setItem('fernDeviceId', deviceId);
+    const timestamp = new Date().toISOString();
+    localStorage.setItem('timestamp', timestamp);
     return deviceId;
 }
 
@@ -76,6 +71,7 @@ function displayIframePopup(message) {
     iframe.style.boxShadow = '0px 0px 5px rgba(0, 0, 0, 0.3)'; // Enhancing the shadow for clarity
     iframe.style.borderRadius = '5px';
     iframe.style.overflow = 'hidden';
+    iframe.style.zIndex = '9999';
 
     // Append iframe to body first so we can manipulate its content
     document.body.appendChild(iframe);
