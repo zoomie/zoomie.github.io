@@ -59,6 +59,23 @@ function initWreckingBall() {
     }
   );
 
+  // Create a grouping of stack (blocks) that will fall down from the top
+  const fallingStack = Composites.stack(
+    render.canvas.width / 3, // x position
+    0, // start above the canvas
+    3, // columns
+    4, // rows
+    20, // column gap
+    20, // row gap
+    (x, y) => {
+      return Bodies.rectangle(x, y, 40, 40, {
+        render: {
+          fillStyle: "#4a4a4a", // darker color to distinguish from other blocks
+        },
+      });
+    }
+  );
+
   // Add walls and ground
   const walls = [
     Bodies.rectangle(render.canvas.width / 2, 0, render.canvas.width, 50, {
@@ -104,8 +121,11 @@ function initWreckingBall() {
     },
   });
 
+  // Create a grouping of stack (blocks) that will fall down from the top
+  // of the page.
+
   // Add all bodies to the world
-  Composite.add(world, [stack, ...walls, ball, ballConstraint]);
+  Composite.add(world, [stack, fallingStack, ...walls, ball, ballConstraint]);
 
   // Add mouse control
   const mouse = Mouse.create(render.canvas);
