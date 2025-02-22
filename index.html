@@ -24,10 +24,26 @@
                 z-index: 1;
                 font-family: Arial, sans-serif;
             }
+            .click-me {
+                position: fixed;
+                bottom: 80px;
+                left: 40px;
+                font-family: Arial, sans-serif;
+                font-size: 1.2rem;
+                color: #333;
+                z-index: 1;
+                cursor: pointer;
+                animation: bounce 1s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
         </style>
     </head>
     <body>
         <h1 class="title">Andrew Arderne</h1>
+        <div class="click-me">See my LinkedIn and GitHub</div>
         <div id="canvas-container"></div>
         <script src="source.js"></script>
     </body>
