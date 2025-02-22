@@ -126,19 +126,25 @@ function initWreckingBall() {
   });
 
   // Add text body for the name
-  const nameText = Bodies.rectangle(render.canvas.width / 2, 400, 420, 80, {
-    isStatic: true,
-    angle: Math.PI * 0.15,
-    render: {
-      fillStyle: "transparent",
-      text: {
-        content: "ANDREW ARDERNE",
-        color: "#333333",
-        size: 48,
-        family: "Arial",
+  const nameText = Bodies.rectangle(
+    render.canvas.width / 2,
+    400,
+    isMobile ? 210 : 420,
+    80,
+    {
+      isStatic: true,
+      angle: Math.PI * 0.15,
+      render: {
+        fillStyle: "transparent",
+        text: {
+          content: "ANDREW ARDERNE",
+          color: "#333333",
+          size: isMobile ? 32 : 48,
+          family: "Arial",
+        },
       },
-    },
-  });
+    }
+  );
 
   // Create a grouping of stack (blocks) that will fall down from the top
   // of the page.
@@ -228,6 +234,18 @@ function initWreckingBall() {
   window.addEventListener("resize", () => {
     const isMobile = window.innerWidth <= 768;
     const newHeight = isMobile ? window.innerHeight * 0.9 : window.innerHeight;
+    const nameTextBody = world.bodies.find(
+      (body) => body.render.text?.content === "ANDREW ARDERNE"
+    );
+
+    if (nameTextBody) {
+      // Update text size and body width for mobile
+      nameTextBody.render.text.size = isMobile ? 32 : 48;
+      const newWidth = isMobile ? 210 : 420; // Halved width for mobile
+      const scaleX =
+        newWidth / (nameTextBody.bounds.max.x - nameTextBody.bounds.min.x);
+      Matter.Body.scale(nameTextBody, scaleX, 1);
+    }
 
     render.canvas.width = window.innerWidth;
     render.canvas.height = newHeight;
