@@ -94,7 +94,7 @@ function initWreckingBall() {
 
   // Add ball constraint
   const ballConstraint = Constraint.create({
-    pointA: { x: 400, y: 300 },
+    pointA: { x: 500, y: 300 },
     bodyB: ball,
     stiffness: 0.01,
     render: {
