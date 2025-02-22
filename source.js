@@ -20,13 +20,17 @@ function initWreckingBall() {
   const engine = Engine.create();
   const world = engine.world;
 
+  // Calculate height based on screen size
+  const isMobile = window.innerWidth <= 768;
+  const canvasHeight = isMobile ? window.innerHeight * 0.9 : window.innerHeight;
+
   // create renderer
   const render = Render.create({
     element: document.getElementById("canvas-container"),
     engine: engine,
     options: {
       width: window.innerWidth,
-      height: window.innerHeight,
+      height: canvasHeight,
       wireframes: false,
       background: "#f0f0f0",
       showAngleIndicator: true,
@@ -220,20 +224,23 @@ function initWreckingBall() {
     }
   });
 
-  // Handle window resize
+  // Update the window resize handler
   window.addEventListener("resize", () => {
+    const isMobile = window.innerWidth <= 768;
+    const newHeight = isMobile ? window.innerHeight * 0.9 : window.innerHeight;
+
     render.canvas.width = window.innerWidth;
-    render.canvas.height = window.innerHeight;
+    render.canvas.height = newHeight;
     Render.lookAt(render, {
       min: { x: 0, y: 0 },
-      max: { x: window.innerWidth, y: window.innerHeight },
+      max: { x: window.innerWidth, y: newHeight },
     });
   });
 
-  // Initial viewport setup
+  // Update initial viewport setup
   Render.lookAt(render, {
     min: { x: 0, y: 0 },
-    max: { x: window.innerWidth, y: window.innerHeight },
+    max: { x: window.innerWidth, y: canvasHeight },
   });
 
   return {
