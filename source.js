@@ -121,11 +121,33 @@ function initWreckingBall() {
     },
   });
 
+  // Add text body for the name
+  const nameText = Bodies.rectangle(render.canvas.width / 2, 400, 420, 80, {
+    isStatic: true,
+    angle: Math.PI * 0.15,
+    render: {
+      fillStyle: "transparent",
+      text: {
+        content: "ANDREW ARDERNE",
+        color: "#333333",
+        size: 48,
+        family: "Arial",
+      },
+    },
+  });
+
   // Create a grouping of stack (blocks) that will fall down from the top
   // of the page.
 
   // Add all bodies to the world
-  Composite.add(world, [stack, fallingStack, ...walls, ball, ballConstraint]);
+  Composite.add(world, [
+    stack,
+    fallingStack,
+    ...walls,
+    ball,
+    ballConstraint,
+    nameText,
+  ]);
 
   // Add mouse control
   const mouse = Mouse.create(render.canvas);
