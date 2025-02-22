@@ -63,7 +63,7 @@ function initWreckingBall() {
     }
   );
 
-  // Create a grouping of stack (blocks) that will fall down from the top
+  // Create a grouping of circles that will fall down from the top
   const fallingStack = Composites.stack(
     render.canvas.width / 3, // x position
     0, // start above the canvas
@@ -72,7 +72,7 @@ function initWreckingBall() {
     20, // column gap
     20, // row gap
     (x, y) => {
-      return Bodies.rectangle(x, y, 40, 40, {
+      return Bodies.circle(x, y, 20, {
         render: {
           fillStyle: "#4a4a4a", // darker color to distinguish from other blocks
         },
