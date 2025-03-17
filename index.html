@@ -84,14 +84,14 @@
             const commands = [
                 {
                     command: 'whoami',
-                    output: `Andrew Arderne - Software Enginee`
+                    output: `Andrew Arderne - Software Engineer`
                 },
                 {
                     command: 'ls -la',
                     output: `<pre>total 5
-drwxr-xr-x  2 andrew  staff  160 Jun 10 10:00 .
 drwxr-xr-x  3 andrew  staff   96 Jun 10 10:00 ..
 -rw-r--r--  1 andrew  staff  512 Jun 10 10:00 about.txt
+-rw-r--r--  1 andrew  staff  512 Jun 10 10:00 skills.txt
 -rw-r--r--  1 andrew  staff  328 Jun 10 10:00 experience.txt</pre>`
                 },
                 {
@@ -100,17 +100,21 @@ drwxr-xr-x  3 andrew  staff   96 Jun 10 10:00 ..
                 },
                 {
                     command: 'cat skills.txt',
-                    output: `<pre>• Go
-• Go
-• Python
-• Clojure
-• JavaScript
-• Bash
-</pre>`
+                    output: `<pre> Go, Python, Clojure, JavaScript</pre>`
                 },
                 {
-                    command: 'cat projects.txt',
-                    output: `<pre>Check out my projects on GitHub!</pre>`
+                    command: 'cat experience.txt',
+                    output: `<pre>Software Engineer | Ravelin, London, UK | Oct 2022 - Present
+• Built a SQL execution locking mechanism for a multi-tenant database and a breached credentials database with 4B+ rows
+• Led projects on TLS fingerprinting, automating data science workloads and building devs' internal tooling
+
+Software Engineer | Prolific, London, UK | May 2021 - Sep 2022
+• Built out the public API and onboarded engineering teams including Google DeepMind
+• Implemented 2-factor authentication from scratch
+
+Software Engineer | Navenio, Oxford, UK | Nov 2018 - Apr 2021
+• Built notification system and analytics download system
+</pre>`
                 },
                 {
                     command: 'echo "Connect with me:"',
