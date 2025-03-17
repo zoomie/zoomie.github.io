@@ -346,7 +346,7 @@ Complex is better than complicated.
             }
             
             // Function to animate text character by character
-            async function animateText(text, element, speed = 1) {
+            async function animateText(text, element, speed = 2, chunkSize = 5) {
                 return new Promise(resolve => {
                     let i = 0;
                     isTyping = true;
@@ -362,9 +362,10 @@ Complex is better than complicated.
                     
                     const typing = setInterval(() => {
                         if (i < textContent.length) {
-                            // Add one character at a time
-                            element.innerHTML = textContent.substring(0, i + 1);
-                            i++;
+                            // Add chunk of characters at a time
+                            const nextChunk = Math.min(i + chunkSize, textContent.length);
+                            element.innerHTML = textContent.substring(0, nextChunk);
+                            i = nextChunk;
                         } else {
                             clearInterval(typing);
                             isTyping = false;
