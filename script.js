@@ -126,7 +126,19 @@ function addLine(text, className) {
   line.className = className;
   line.innerHTML = text;
   terminal.appendChild(line);
-  terminal.scrollTop = terminal.scrollHeight;
+
+  // Ensure scrolling happens after content is rendered
+  setTimeout(() => {
+    terminal.scrollTop = terminal.scrollHeight;
+
+    // Add extra padding at the bottom if we're on mobile
+    if (isMobileDevice()) {
+      const extraPadding = document.createElement("div");
+      extraPadding.style.height = "20px";
+      terminal.appendChild(extraPadding);
+    }
+  }, 10);
+
   return line;
 }
 
