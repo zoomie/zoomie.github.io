@@ -5,10 +5,16 @@ const executeButton = document.getElementById("execute-button");
 const commands = [
   {
     command: "whoami",
-    output: `Andrew Arderne - Software Engineer`,
+    output: `<pre>
+     _              _                       _            _                       
+    / \\   _ __   __| |_ __ _____      __   / \\   _ __ __| | ___ _ __ _ __   ___ 
+   / _ \\ | '_ \\ / _\` | '__/ _ \\ \\ /\\ / /  / _ \\ | '__/ _\` |/ _ \\ '__| '_ \\ / _ \\
+  / ___ \\| | | | (_| | | |  __/\\ V  V /  / ___ \\| | | (_| |  __/ |  | | | |  __/
+ /_/   \\_\\_| |_|\\__,_|_|  \\___| \\_/\\_/  /_/   \\_\\_|  \\__,_|\\___|_|  |_| |_|\\___|
+</pre>`,
   },
   {
-    command: "ls -la",
+    command: "ls",
     output: `<pre>total 5
 drwxr-xr-x  2 andrew  staff  <span class="directory">.</span>
 drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>

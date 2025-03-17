@@ -64,6 +64,12 @@ body {
     z-index: 1;
 }
 
+@media (max-width: 768px) {
+    .background-container {
+        display: none;
+    }
+}
+
 .terminal-container {
     position: relative;
     z-index: 2;
@@ -226,8 +232,8 @@ body {
 
 #execute-button {
     position: fixed;
-    bottom: 40px;
-    right: 40px;
+    bottom: 100px;
+    right: 200px;
     background-color: #7cdc7c;
     color: #282c34;
     border: none;
