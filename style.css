@@ -34,13 +34,73 @@ body {
     box-sizing: border-box;
 }
 
-#terminal {
+.terminal-window {
     width: 100%;
     max-width: 1000px;
     height: calc(100vh - 4rem);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background-color: #2c2c2c;
+    position: relative;
+}
+
+.title-bar {
+    height: 28px;
+    background-color: #3a3a3a;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    -webkit-app-region: drag;
+    user-select: none;
+    position: relative;
+}
+
+.traffic-lights {
+    display: flex;
+    gap: 8px;
+    margin-right: 8px;
+    -webkit-app-region: no-drag;
+}
+
+.traffic-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: background-color 0.1s;
+}
+
+.traffic-light.close {
+    background-color: #ff5f56;
+    border: 1px solid #e0443e;
+}
+
+.traffic-light.minimize {
+    background-color: #ffbd2e;
+    border: 1px solid #dea123;
+}
+
+.traffic-light.zoom {
+    background-color: #27c93f;
+    border: 1px solid #1aab29;
+}
+
+.traffic-light:hover {
+    filter: brightness(85%);
+}
+
+.title-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    color: #bcbcbc;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#terminal {
+    height: calc(100% - 28px);
     padding: 20px;
     background-color: rgba(40, 44, 52, 0.95);
     box-sizing: border-box;
@@ -206,11 +266,19 @@ body {
         padding: 0;
     }
     
-    #terminal {
+    .terminal-window {
         height: 85vh;
         margin-bottom: 15vh;
         border-radius: 0;
-        background-color: rgba(40, 44, 52, 0.98);
+    }
+    
+    .title-bar {
+        padding: 0 8px;
+    }
+    
+    .traffic-light {
+        width: 10px;
+        height: 10px;
     }
     
     .social-icon {
@@ -218,6 +286,13 @@ body {
         font-size: 18px;
         margin-right: 20px;
         margin-top: 20px;
+    }
+    
+    #terminal {
+        height: 85vh;
+        margin-bottom: 15vh;
+        border-radius: 0;
+        background-color: rgba(40, 44, 52, 0.98);
     }
     
     #execute-button {
