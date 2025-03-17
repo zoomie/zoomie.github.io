@@ -1,38 +1,48 @@
 const terminal = document.getElementById("terminal");
 const executeButton = document.getElementById("execute-button");
 
+// Device detection utility
+const isMobileDevice = () => window.innerWidth <= 768;
+
 // Terminal commands and outputs
 const commands = [
   {
     command: "whoami",
-    output: `<pre>
+    desktopOutput: `<pre>
      _              _                       _            _                       
     / \\   _ __   __| |_ __ _____      __   / \\   _ __ __| | ___ _ __ _ __   ___ 
    / _ \\ | '_ \\ / _\` | '__/ _ \\ \\ /\\ / /  / _ \\ | '__/ _\` |/ _ \\ '__| '_ \\ / _ \\
   / ___ \\| | | | (_| | | |  __/\\ V  V /  / ___ \\| | | (_| |  __/ |  | | | |  __/
  /_/   \\_\\_| |_|\\__,_|_|  \\___| \\_/\\_/  /_/   \\_\\_|  \\__,_|\\___|_|  |_| |_|\\___|
 </pre>`,
+    mobileOutput: `<pre>Andrew Arderne
+Software Engineer</pre>`,
   },
   {
     command: "ls",
-    output: `<pre>total 5
+    desktopOutput: `<pre>total 5
 drwxr-xr-x  2 andrew  staff  <span class="directory">.</span>
 drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
 -rw-r--r--  1 andrew  staff  <span class="file">about.txt</span>
 -rw-r--r--  1 andrew  staff  <span class="file">skills.txt</span>
 -rw-r--r--  1 andrew  staff  <span class="file">experience.txt</span></pre>`,
+    mobileOutput: `<pre><span class="file">about.txt</span>
+<span class="file">skills.txt</span>
+<span class="file">experience.txt</span></pre>`,
   },
   {
     command: "cat about.txt",
-    output: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`,
+    desktopOutput: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`,
+    mobileOutput: `<pre>I enjoy building secure and fault-tolerant software. I thrive in tech-curious teams and lead projects from start to finish.</pre>`,
   },
   {
     command: "cat skills.txt",
-    output: `<pre>Go, Python, Clojure, JavaScript</pre>`,
+    desktopOutput: `<pre>Go, Python, Clojure, JavaScript</pre>`,
+    mobileOutput: `<pre>Go, Python, Clojure, JavaScript</pre>`,
   },
   {
     command: "git log -- experience.txt",
-    output: `<pre>commit 8a71f92d3b4e5c6a0d1f2e3b4c5d6e7f8a9b0c1d
+    desktopOutput: `<pre>commit 8a71f92d3b4e5c6a0d1f2e3b4c5d6e7f8a9b0c1d
 Company: Ravelin
 Date:   Oct 2022 - Present
 
@@ -56,34 +66,53 @@ Company: Navenio
 Date:   Nov 2018 - Apr 2021
 
     Built notification system and analytics download system</pre>`,
+    mobileOutput: `<pre>Ravelin (2022-Present)
+• SQL locking for multi-tenant DB
+• TLS fingerprinting
+• Data science automation
+
+Prolific (2021-2022)
+• Public API development
+• 2FA implementation
+
+Navenio (2018-2021)
+• Notifications & analytics</pre>`,
   },
   {
     command: 'echo "Connect with me:"',
-    output: `<pre>Connect with me:</pre>
+    desktopOutput: `<pre>Connect with me:</pre>
+<a href="https://www.linkedin.com/in/andrew-arderne" target="_blank" class="social-icon linkedin">LinkedIn</a>
+<a href="https://github.com/zoomie" target="_blank" class="social-icon github">GitHub</a>`,
+    mobileOutput: `<pre>Connect with me:</pre>
 <a href="https://www.linkedin.com/in/andrew-arderne" target="_blank" class="social-icon linkedin">LinkedIn</a>
 <a href="https://github.com/zoomie" target="_blank" class="social-icon github">GitHub</a>`,
   },
   {
     command: "pbpaste",
-    output: `<pre>andrew.arderne@pm.me</pre>`,
+    desktopOutput: `<pre>andrew.arderne@pm.me</pre>`,
+    mobileOutput: `<pre>andrew.arderne@pm.me</pre>`,
   },
   {
     command: "curl https://good.ideas.com | jq",
-    output: `<pre>Simple is better than complex.
+    desktopOutput: `<pre>Simple is better than complex.
 Complex is better than complicated.
 <pre>`,
+    mobileOutput: `<pre>Simple is better than complex.
+Complex is better than complicated.</pre>`,
   },
   {
     command: "cat started-programming.txt",
-    output: `<pre>Unix timestamp: 1426602336</pre>`,
+    desktopOutput: `<pre>Unix timestamp: 1426602336</pre>`,
+    mobileOutput: `<pre>Unix timestamp: 1426602336</pre>`,
   },
   {
     command:
       'echo "Andrew has been programming for $(( ($(date +%s) - 1426602057) / 31556952 )) years"',
-    output: `<pre>Andrew has been programming for 10 years
+    desktopOutput: `<pre>Andrew has been programming for 10 years
 
 
 </pre>`,
+    mobileOutput: `<pre>Andrew has been programming for 10 years</pre>`,
   },
 ];
 
@@ -156,6 +185,11 @@ function typeText(text, element, speed = 50) {
   });
 }
 
+// Function to get the appropriate output based on device type
+function getCommandOutput(commandObj) {
+  return isMobileDevice() ? commandObj.mobileOutput : commandObj.desktopOutput;
+}
+
 // Function to execute a command
 async function executeCommand() {
   if (isTyping || currentCommandIndex >= commands.length) return;
@@ -170,11 +204,10 @@ async function executeCommand() {
 
   const commandObj = commands[currentCommandIndex];
 
-  // The command is already displayed, just execute it
-
   // Add output line and animate it
   const outputLine = addLine("", "output");
-  await animateText(commandObj.output, outputLine);
+  const output = getCommandOutput(commandObj);
+  await animateText(output, outputLine);
 
   // Increment command index
   currentCommandIndex++;
@@ -240,4 +273,24 @@ window.addEventListener("load", () => {
     // Execute it
     executeCommand();
   }, 1000);
+});
+
+// Add window resize listener to handle orientation changes
+let lastDeviceType = isMobileDevice();
+window.addEventListener("resize", () => {
+  const currentDeviceType = isMobileDevice();
+  if (currentDeviceType !== lastDeviceType) {
+    lastDeviceType = currentDeviceType;
+    // Reset the terminal and restart from beginning
+    terminal.innerHTML = "";
+    currentCommandIndex = 0;
+    currentPromptLine = null;
+    // Re-initialize the terminal
+    const firstCommand = commands[0].command;
+    currentPromptLine = addLine(
+      `<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${firstCommand}</span>`,
+      ""
+    );
+    executeCommand();
+  }
 });
