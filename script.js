@@ -200,7 +200,16 @@ executeButton.addEventListener("keydown", (event) => {
 
 // Start with the first prompt line and automatically run the first command
 window.addEventListener("load", () => {
-  // Run the first command automatically after a short delay
+  const loadingOverlay = document.getElementById("loading-overlay");
+
+  // Hide loading overlay after 1000ms (1 second)
+  setTimeout(() => {
+    loadingOverlay.classList.add("hidden");
+    // Remove the overlay from DOM after animation completes
+    setTimeout(() => loadingOverlay.remove(), 300);
+  }, 1000);
+
+  // Run the first command automatically after the loading overlay disappears
   setTimeout(() => {
     // Add the first command without a cursor since it will execute immediately
     currentPromptLine = addLine(
