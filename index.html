@@ -13,7 +13,8 @@
                 line-height: 1.5;
                 height: 100vh;
                 width: 100vw;
-                overflow: hidden;
+                overflow: auto;
+                position: relative;
             }
             
             #terminal {
@@ -180,20 +181,17 @@
                 border: 1px solid #555;
             }
             
-            /* Responsive adjustments for different screen sizes */
-            @media (min-width: 1200px) {
-                #terminal {
-                    height: 90vh;
-                    margin-top: 5vh;
-                    border-radius: 6px;
-                }
-                
-                body {
-                    padding: 20px;
-                }
-            }
             
             @media (max-width: 768px) {
+                body {
+                    overflow: auto;
+                }
+                
+                #terminal {
+                    height: 85vh;
+                    margin-bottom: 15vh;
+                }
+                
                 .social-icon {
                     padding: 10px 18px;
                     font-size: 18px;
@@ -212,51 +210,8 @@
                     font-size: 16px;
                     padding: 2px 8px;
                 }
-                
-                #terminal {
-                    height: 90vh;
-                    margin-bottom: 10vh;
-                }
             }
             
-            @media (max-width: 480px) {
-                #terminal {
-                    padding: 10px;
-                    height: 85vh;
-                    margin-bottom: 15vh;
-                }
-                
-                .prompt, .git-branch, .command, .arrow {
-                    font-size: 14px;
-                }
-                
-                .output {
-                    font-size: 14px;
-                }
-                
-                .social-icon {
-                    padding: 8px 12px;
-                    font-size: 16px;
-                    margin-right: 10px;
-                }
-                
-                #execute-button {
-                    bottom: 15px;
-                    right: 15px;
-                    padding: 12px 20px;
-                    font-size: 16px;
-                }
-                
-                .keyboard-icon {
-                    font-size: 14px;
-                    padding: 2px 6px;
-                }
-                
-                .cursor {
-                    height: 16px;
-                    width: 8px;
-                }
-            }
         </style>
     </head>
     <body>
