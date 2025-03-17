@@ -18,17 +18,17 @@ const commands = [
     output: `<pre>total 5
 drwxr-xr-x  2 andrew  staff  <span class="directory">.</span>
 drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
--rw-r--r--  1 andrew  staff  <span class="file">skills.txt</span>
 -rw-r--r--  1 andrew  staff  <span class="file">about.txt</span>
+-rw-r--r--  1 andrew  staff  <span class="file">skills.txt</span>
 -rw-r--r--  1 andrew  staff  <span class="file">experience.txt</span></pre>`,
-  },
-  {
-    command: "cat skills.txt",
-    output: `<pre>Go, Python, Clojure, JavaScript</pre>`,
   },
   {
     command: "cat about.txt",
     output: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`,
+  },
+  {
+    command: "cat skills.txt",
+    output: `<pre>Go, Python, Clojure, JavaScript</pre>`,
   },
   {
     command: "git log -- experience.txt",
