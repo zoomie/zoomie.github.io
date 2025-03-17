@@ -206,7 +206,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     loadingOverlay.classList.add("hidden");
     // Remove the overlay from DOM after animation completes
-    setTimeout(() => loadingOverlay.remove(), 300);
+    setTimeout(() => loadingOverlay.remove(), 400);
   }, 1000);
 
   // Run the first command automatically after the loading overlay disappears
