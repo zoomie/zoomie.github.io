@@ -64,6 +64,10 @@ Date:   Nov 2018 - Apr 2021
 <a href="https://github.com/zoomie" target="_blank" class="social-icon github">GitHub</a>`,
   },
   {
+    command: "pbpaste",
+    output: `<pre>andrew.arderne@pm.me</pre>`,
+  },
+  {
     command: "curl https://good.ideas.com | jq",
     output: `<pre>Simple is better than complex.
 Complex is better than complicated.
