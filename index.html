@@ -4,9 +4,9 @@
         <title>Andrew Arderne</title>
         <style>
             body {
-                background-color: #000;
-                color: #0f0;
-                font-family: 'Courier New', monospace;
+                background-color: #1e1e1e;
+                color: #f0f0f0;
+                font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
                 padding: 20px;
                 margin: 0;
                 line-height: 1.5;
@@ -18,29 +18,38 @@
                 margin: 0 auto;
                 overflow-y: auto;
                 height: 90vh;
+                border-radius: 6px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                padding: 10px;
+                background-color: #282c34;
             }
             
             .prompt {
-                color: #0f0;
+                color: #7cdc7c;
+                font-weight: bold;
+            }
+            
+            .git-branch {
+                color: #f08080;
                 font-weight: bold;
             }
             
             .command {
-                color: #fff;
+                color: #f0f0f0;
                 margin-left: 8px;
             }
             
             .output {
-                color: #0f0;
+                color: #f0f0f0;
                 margin-top: 5px;
                 margin-bottom: 15px;
             }
             
             .social-icon {
-                color: #0f0;
+                color: #7cdc7c;
                 text-decoration: none;
                 margin-right: 15px;
-                border: 1px solid #0f0;
+                border: 1px solid #7cdc7c;
                 padding: 5px 10px;
                 border-radius: 4px;
                 display: inline-block;
@@ -48,15 +57,15 @@
             }
             
             .social-icon:hover {
-                background-color: #0f0;
-                color: #000;
+                background-color: #7cdc7c;
+                color: #282c34;
             }
             
             .cursor {
                 display: inline-block;
                 width: 10px;
                 height: 18px;
-                background-color: #0f0;
+                background-color: #f0f0f0;
                 animation: blink 1s step-end infinite;
                 vertical-align: middle;
             }
@@ -69,8 +78,17 @@
             .output pre {
                 margin: 0;
                 white-space: pre-wrap;
-                font-family: 'Courier New', monospace;
-                color: #0f0;
+                font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+                color: #f0f0f0;
+            }
+            
+            .directory {
+                color: #7caaff;
+                font-weight: bold;
+            }
+            
+            .arrow {
+                color: #7cdc7c;
             }
         </style>
     </head>
@@ -89,18 +107,19 @@
                 {
                     command: 'ls -la',
                     output: `<pre>total 5
-drwxr-xr-x  3 andrew  staff   96 Jun 10 10:00 ..
--rw-r--r--  1 andrew  staff  512 Jun 10 10:00 about.txt
+drwxr-xr-x  2 andrew  staff  160 Jun 10 10:00 <span class="directory">.</span>
+drwxr-xr-x  3 andrew  staff   96 Jun 10 10:00 <span class="directory">..</span>
 -rw-r--r--  1 andrew  staff  512 Jun 10 10:00 skills.txt
+-rw-r--r--  1 andrew  staff  512 Jun 10 10:00 about.txt
 -rw-r--r--  1 andrew  staff  328 Jun 10 10:00 experience.txt</pre>`
+                },
+                {
+                    command: 'cat skills.txt',
+                    output: `<pre>Go, Python, Clojure, JavaScript</pre>`
                 },
                 {
                     command: 'cat about.txt',
                     output: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`
-                },
-                {
-                    command: 'cat skills.txt',
-                    output: `<pre> Go, Python, Clojure, JavaScript</pre>`
                 },
                 {
                     command: 'cat experience.txt',
@@ -137,7 +156,7 @@ Software Engineer | Navenio, Oxford, UK | Nov 2018 - Apr 2021
             async function executeCommand(commandObj, index) {
                 // Add prompt and command
                 const promptLine = document.createElement('div');
-                promptLine.innerHTML = '<span class="prompt">visitor@andrew-arderne:~$</span> <span class="command"></span>';
+                promptLine.innerHTML = '<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command"></span>';
                 terminal.appendChild(promptLine);
                 
                 const commandSpan = promptLine.querySelector('.command');
@@ -157,7 +176,7 @@ Software Engineer | Navenio, Oxford, UK | Nov 2018 - Apr 2021
                     executeCommand(commands[index + 1], index + 1);
                 } else {
                     // Add final prompt line with blinking cursor
-                    addLine('<span class="prompt">visitor@andrew-arderne:~$</span> <span class="cursor"></span>', '');
+                    addLine('<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="cursor"></span>', '');
                 }
             }
             
