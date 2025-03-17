@@ -93,12 +93,22 @@ Complex is better than complicated.
 <pre>`,
   },
   {
-    command: "cat started-programming.txt",
-    desktopOutput: `<pre>Unix timestamp: 1426602336</pre>`,
+    command: "git log --reverse --max-parents=0 HEAD",
+    desktopOutput: `<pre>
+commit 33fd28d321e540b8e391b52f47b597b7e78f5597
+Author: zoomie <andrew.arderne@pm.me>
+Date:   Sat March 12 15:31:01 2015
+
+    Started programming!
+</pre>`,
+  },
+  {
+    command: `date -j -f "%a %B %d %T %Y" "Sat March 12 15:31:01 2015" +%s`,
+    desktopOutput: `<pre>1426174261</pre>`,
   },
   {
     command:
-      'echo "Andrew has been programming for $(( ($(date +%s) - 1426602057) / 31556952 )) years"',
+      'echo "Andrew has been programming for $(( ($(date +%s) - 1426174261) / 31556952 )) years"',
     desktopOutput: `<pre>Andrew has been programming for 10 years
 
 
