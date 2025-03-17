@@ -169,6 +169,17 @@
                 cursor: not-allowed;
             }
             
+            /* Add more pronounced disabled styling */
+            #execute-button:disabled {
+                background-color: #3a6e3a;
+                color: #888;
+                opacity: 0.6;
+                box-shadow: none;
+                transform: scale(0.95);
+                animation: none;
+                border: 1px solid #555;
+            }
+            
             /* Responsive adjustments for different screen sizes */
             @media (min-width: 1200px) {
                 #terminal {
@@ -295,6 +306,9 @@ Navenio | Nov 2018 - Apr 2021
                     command: 'curl https://good.ideas.com | jq',
                     output: `<pre>Simple is better than complex.
 Complex is better than complicated.
+
+
+
 <pre>`
                 }
             ];
@@ -391,9 +405,7 @@ Complex is better than complicated.
                 
                 // If we've reached the end, disable the button
                 if (currentCommandIndex >= commands.length) {
-                    executeButton.disabled = true;
-                    executeButton.textContent = "All Commands Executed";
-                    executeButton.style.animation = "none";
+                    executeButton.style.display = "none";
                 } else {
                     // Add next prompt line with the next command already written and cursor flashing at the end
                     const nextCommand = commands[currentCommandIndex].command;
