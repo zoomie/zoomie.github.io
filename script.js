@@ -87,12 +87,6 @@ Navenio (2018-2021)
     desktopOutput: `<pre>andrew.arderne@pm.me</pre>`,
   },
   {
-    command: "curl https://good.ideas.com | jq",
-    desktopOutput: `<pre>Simple is better than complex.
-Complex is better than complicated.
-<pre>`,
-  },
-  {
     command: "git log --reverse --max-parents=0 HEAD",
     desktopOutput: `<pre>
 commit 33fd28d321e540b8e391b52f47b597b7e78f5597
@@ -110,9 +104,14 @@ Date:   Sat March 12 15:31:01 2015
     command:
       'echo "Andrew has been programming for $(( ($(date +%s) - 1426174261) / 31556952 )) years"',
     desktopOutput: `<pre>Andrew has been programming for 10 years
-
-
 </pre>`,
+  },
+  {
+    command: "curl https://good.ideas.com | jq",
+    desktopOutput: `<pre>Simple is better than complex.
+Complex is better than complicated.
+
+<pre>`,
   },
 ];
 
