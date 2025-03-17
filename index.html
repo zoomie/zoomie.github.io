@@ -93,32 +93,33 @@
             
             #execute-button {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
+                bottom: 40px;
+                right: 40px;
                 background-color: #7cdc7c;
                 color: #282c34;
                 border: none;
-                border-radius: 6px;
-                padding: 20px 30px;
+                border-radius: 8px;
+                padding: 25px 40px;
                 font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-                font-size: 20px;
+                font-size: 24px;
                 font-weight: bold;
                 cursor: pointer;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
                 transition: all 0.2s ease;
                 animation: pulse 2s infinite;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
+                z-index: 100;
             }
             
             .keyboard-icon {
                 display: inline-block;
-                border: 1px solid currentColor;
-                border-radius: 3px;
-                padding: 2px 8px;
-                font-size: 16px;
+                border: 2px solid currentColor;
+                border-radius: 4px;
+                padding: 3px 10px;
+                font-size: 18px;
                 line-height: 1;
                 margin-left: 5px;
             }
@@ -231,6 +232,36 @@ Complex is better than complicated.
                 return line;
             }
             
+            // Function to animate text character by character
+            async function animateText(text, element, speed = 1) {
+                return new Promise(resolve => {
+                    let i = 0;
+                    isTyping = true;
+                    executeButton.disabled = true;
+                    
+                    // Store the original HTML to handle HTML tags properly
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = text;
+                    const textContent = tempDiv.innerHTML;
+                    
+                    // Create a container for the animated content
+                    element.innerHTML = '';
+                    
+                    const typing = setInterval(() => {
+                        if (i < textContent.length) {
+                            // Add one character at a time
+                            element.innerHTML = textContent.substring(0, i + 1);
+                            i++;
+                        } else {
+                            clearInterval(typing);
+                            isTyping = false;
+                            executeButton.disabled = false;
+                            resolve();
+                        }
+                    }, speed);
+                });
+            }
+            
             // Function to simulate typing
             function typeText(text, element, speed = 50) {
                 return new Promise(resolve => {
@@ -270,8 +301,9 @@ Complex is better than complicated.
                 
                 // The command is already displayed, just execute it
                 
-                // Add output
-                addLine(commandObj.output, 'output');
+                // Add output line and animate it
+                const outputLine = addLine('', 'output');
+                await animateText(commandObj.output, outputLine);
                 
                 // Increment command index
                 currentCommandIndex++;
@@ -314,9 +346,8 @@ Complex is better than complicated.
             window.addEventListener('load', () => {
                 // Run the first command automatically after a short delay
                 setTimeout(() => {
-                    // Add the first command with cursor
-                    const firstCommand = commands[0].command;
-                    currentPromptLine = addLine(`<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${firstCommand}<span class="cursor"></span></span>`, '');
+                    // Add the first command without a cursor since it will execute immediately
+                    currentPromptLine = addLine(`<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${commands[0].command}</span>`, '');
                     
                     // Execute it
                     executeCommand();
