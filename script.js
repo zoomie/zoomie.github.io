@@ -10,11 +10,11 @@ const commands = [
   {
     command: "ls -la",
     output: `<pre>total 5
-drwxr-xr-x  2 andrew  staff  160 Jun 10 10:00 <span class="directory">.</span>
-drwxr-xr-x  3 andrew  staff   96 Jun 10 10:00 <span class="directory">..</span>
--rw-r--r--  1 andrew  staff  512 Jun 10 10:00 skills.txt
--rw-r--r--  1 andrew  staff  512 Jun 10 10:00 about.txt
--rw-r--r--  1 andrew  staff  328 Jun 10 10:00 experience.txt</pre>`,
+drwxr-xr-x  2 andrew  staff  <span class="directory">.</span>
+drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
+-rw-r--r--  1 andrew  staff  <span class="file">skills.txt</span>
+-rw-r--r--  1 andrew  staff  <span class="file">about.txt</span>
+-rw-r--r--  1 andrew  staff  <span class="file">experience.txt</span></pre>`,
   },
   {
     command: "cat skills.txt",
