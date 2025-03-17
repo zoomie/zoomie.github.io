@@ -33,12 +33,10 @@ drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
   {
     command: "cat about.txt",
     desktopOutput: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`,
-    mobileOutput: `<pre>I enjoy building secure and fault-tolerant software. I thrive in tech-curious teams and lead projects from start to finish.</pre>`,
   },
   {
     command: "cat skills.txt",
     desktopOutput: `<pre>Go, Python, Clojure, JavaScript</pre>`,
-    mobileOutput: `<pre>Go, Python, Clojure, JavaScript</pre>`,
   },
   {
     command: "git log -- experience.txt",
@@ -83,27 +81,20 @@ Navenio (2018-2021)
     desktopOutput: `<pre>Connect with me:</pre>
 <a href="https://www.linkedin.com/in/andrew-arderne" target="_blank" class="social-icon linkedin">LinkedIn</a>
 <a href="https://github.com/zoomie" target="_blank" class="social-icon github">GitHub</a>`,
-    mobileOutput: `<pre>Connect with me:</pre>
-<a href="https://www.linkedin.com/in/andrew-arderne" target="_blank" class="social-icon linkedin">LinkedIn</a>
-<a href="https://github.com/zoomie" target="_blank" class="social-icon github">GitHub</a>`,
   },
   {
     command: "pbpaste",
     desktopOutput: `<pre>andrew.arderne@pm.me</pre>`,
-    mobileOutput: `<pre>andrew.arderne@pm.me</pre>`,
   },
   {
     command: "curl https://good.ideas.com | jq",
     desktopOutput: `<pre>Simple is better than complex.
 Complex is better than complicated.
 <pre>`,
-    mobileOutput: `<pre>Simple is better than complex.
-Complex is better than complicated.</pre>`,
   },
   {
     command: "cat started-programming.txt",
     desktopOutput: `<pre>Unix timestamp: 1426602336</pre>`,
-    mobileOutput: `<pre>Unix timestamp: 1426602336</pre>`,
   },
   {
     command:
@@ -112,7 +103,6 @@ Complex is better than complicated.</pre>`,
 
 
 </pre>`,
-    mobileOutput: `<pre>Andrew has been programming for 10 years</pre>`,
   },
 ];
 
@@ -199,7 +189,11 @@ function typeText(text, element, speed = 50) {
 
 // Function to get the appropriate output based on device type
 function getCommandOutput(commandObj) {
-  return isMobileDevice() ? commandObj.mobileOutput : commandObj.desktopOutput;
+  // If the command has a mobileOutput and isMobileDevice, return the mobileOutput
+  if (commandObj.mobileOutput && isMobileDevice()) {
+    return commandObj.mobileOutput;
+  }
+  return commandObj.desktopOutput;
 }
 
 // Function to execute a command
