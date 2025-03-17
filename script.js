@@ -31,17 +31,31 @@ drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
     output: `<pre>I enjoy building software that helps users while being secure and fault-tolerant. I thrive in tech-curious teams and have a proven track record of leading projects from inception to completion.</pre>`,
   },
   {
-    command: "cat experience.txt",
-    output: `<pre>Ravelin | Oct 2022 - Present
-• Built a SQL execution locking mechanism for a multi-tenant database and a breached credentials database with 4B+ rows
-• Led projects on TLS fingerprinting, automating data science workloads and building devs' internal tooling
+    command: "git log -- experience.txt",
+    output: `<pre>commit 8a71f92d3b4e5c6a0d1f2e3b4c5d6e7f8a9b0c1d
+Company: Ravelin
+Date:   Oct 2022 - Present
 
-Prolific | May 2021 - Sep 2022
-• Built out the public API and onboarded engineering teams including Google DeepMind
-• Implemented 2-factor authentication from scratch
+    Built a SQL execution locking mechanism for a multi-tenant database 
+    and a breached credentials database with 4B+ rows
 
-Navenio | Nov 2018 - Apr 2021
-• Built notification system and analytics download system</pre>`,
+    Led projects on TLS fingerprinting, automating data science workloads 
+    and building devs' internal tooling
+
+commit 3e4f5c6d7b8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c
+Company: Prolific
+Date:   May 2021 - Sep 2022
+
+    Built out the public API and onboarded engineering teams including 
+    Google DeepMind
+
+    Implemented 2-factor authentication from scratch
+
+commit 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t
+Company: Navenio
+Date:   Nov 2018 - Apr 2021
+
+    Built notification system and analytics download system</pre>`,
   },
   {
     command: 'echo "Connect with me:"',
