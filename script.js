@@ -62,6 +62,7 @@ Complex is better than complicated.
       'echo "Andrew has been programming for $(( ($(date +%s) - 1426602057) / 31556952 )) years"',
     output: `<pre>Andrew has been programming for 10 years
 
+
 </pre>`,
   },
 ];
