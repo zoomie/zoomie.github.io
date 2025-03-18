@@ -107,11 +107,19 @@ Date:   Sat March 12 15:31:01 2015
 </pre>`,
   },
   {
-    command: "curl https://good.ideas.com | jq",
-    desktopOutput: `<pre>Simple is better than complex.
-Complex is better than complicated.
+    command: "curl https://favourite.programmer.com",
+    desktopOutput: `<pre>
+***
+TLS handshake (This can be fingerprinted which is super interesting)
+***
+HTTP/3 protocol (I'm a little sad that HTTP is moving away from plain text)
+HTTP/3 socket (Though fun to see UDP making a comeback in a big way)
+***
+
+"Simplicity is hard work. But, there's a huge payoff." -- Rich Hickey
 
 <pre>`,
+    mobileOutput: `<pre>"Simplicity is hard work. But, there's a huge payoff." -- Rich Hickey</pre>`,
   },
 ];
 
@@ -227,9 +235,20 @@ async function executeCommand() {
   // Increment command index
   currentCommandIndex++;
 
-  // If we've reached the end, disable the button
+  // If we've reached the end, disable the button and ensure scroll to bottom
   if (currentCommandIndex >= commands.length) {
     executeButton.style.display = "none";
+    // Add a small delay to ensure all content is rendered
+    setTimeout(() => {
+      terminal.scrollTop = terminal.scrollHeight;
+      // Add extra padding at the bottom if we're on mobile
+      if (isMobileDevice()) {
+        const extraPadding = document.createElement("div");
+        extraPadding.style.height = "20px";
+        terminal.appendChild(extraPadding);
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    }, 50);
   } else {
     // Add next prompt line with the next command already written and cursor flashing at the end
     const nextCommand = commands[currentCommandIndex].command;
@@ -274,7 +293,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     loadingOverlay.classList.add("hidden");
     // Remove the overlay from DOM after animation completes
-    setTimeout(() => loadingOverlay.remove(), 400);
+    setTimeout(() => loadingOverlay.remove(), 300);
   }, 1000);
 
   // Run the first command automatically after the loading overlay disappears
