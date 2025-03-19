@@ -158,8 +158,21 @@ body {
     font-weight: 400;
 }
 
+.progress-container {
+    height: 3px;
+    background-color: #383838;
+    width: 100%;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #7cdc7c;
+    transition: width 0.3s ease-in-out;
+}
+
 #terminal {
-    height: calc(100% - 28px);
+    height: calc(100% - 31px);
     padding: 20px;
     background-color: rgba(40, 44, 52, 0.95);
     box-sizing: border-box;

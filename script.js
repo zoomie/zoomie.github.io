@@ -1,5 +1,6 @@
 const terminal = document.getElementById("terminal");
 const executeButton = document.getElementById("execute-button");
+const progressBar = document.getElementById("progress-bar");
 
 // Device detection utility
 const isMobileDevice = () => window.innerWidth <= 768;
@@ -129,7 +130,7 @@ HTTP/3 socket (Though fun to see UDP making a comeback in a big way)
     mobileOutput: `<pre>System hacked successfully.</pre>`,
     onExecute: function () {
       setTimeout(() => {
-        alert("<script>alert(I also enjoy security!)</script>");
+        alert("I also enjoy security!");
       }, 50);
     },
   },
@@ -148,6 +149,15 @@ HTTP/3 socket (Though fun to see UDP making a comeback in a big way)
 let currentCommandIndex = 0;
 let isTyping = false;
 let currentPromptLine = null;
+
+// Function to update progress bar
+function updateProgressBar() {
+  if (!progressBar) return;
+
+  const totalCommands = commands.length;
+  const progress = (currentCommandIndex / totalCommands) * 100;
+  progressBar.style.width = `${progress}%`;
+}
 
 // Function to add a new line to the terminal
 function addLine(text, className) {
@@ -262,6 +272,9 @@ async function executeCommand() {
   // Increment command index
   currentCommandIndex++;
 
+  // Update progress bar
+  updateProgressBar();
+
   // If we've reached the end, disable the button and ensure scroll to bottom
   if (currentCommandIndex >= commands.length) {
     executeButton.style.display = "none";
@@ -316,6 +329,11 @@ executeButton.addEventListener("keydown", (event) => {
 window.addEventListener("load", () => {
   const loadingOverlay = document.getElementById("loading-overlay");
 
+  // Initialize progress bar to 0%
+  if (progressBar) {
+    progressBar.style.width = "0%";
+  }
+
   // Hide loading overlay after 1000ms (1 second)
   setTimeout(() => {
     loadingOverlay.classList.add("hidden");
@@ -346,6 +364,12 @@ window.addEventListener("resize", () => {
     terminal.innerHTML = "";
     currentCommandIndex = 0;
     currentPromptLine = null;
+
+    // Reset progress bar
+    if (progressBar) {
+      progressBar.style.width = "0%";
+    }
+
     // Re-initialize the terminal
     const firstCommand = commands[0].command;
     currentPromptLine = addLine(
