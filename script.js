@@ -123,6 +123,26 @@ HTTP/3 socket (Though fun to see UDP making a comeback in a big way)
 <pre>`,
     mobileOutput: `<pre>"Simplicity is hard work. But, there's a huge payoff." -- Rich Hickey</pre>`,
   },
+  {
+    command: "go run hackcomputer.go",
+    desktopOutput: `<pre>System hacked successfully.</pre>`,
+    mobileOutput: `<pre>System hacked successfully.</pre>`,
+    onExecute: function () {
+      setTimeout(() => {
+        alert("<script>alert(I also enjoy security!)</script>");
+      }, 50);
+    },
+  },
+  {
+    command: "exit",
+    desktopOutput: `<pre>Thanks for visiting!</pre>`,
+    mobileOutput: `<pre>Thanks for visiting!</pre>`,
+    onExecute: function () {
+      setTimeout(() => {
+        launchConfetti();
+      }, 500);
+    },
+  },
 ];
 
 let currentCommandIndex = 0;
@@ -234,6 +254,11 @@ async function executeCommand() {
   const output = getCommandOutput(commandObj);
   await animateText(output, outputLine);
 
+  // Execute any special onExecute function if it exists
+  if (commandObj.onExecute) {
+    commandObj.onExecute();
+  }
+
   // Increment command index
   currentCommandIndex++;
 
@@ -330,3 +355,59 @@ window.addEventListener("resize", () => {
     executeCommand();
   }
 });
+
+// Confetti animation function
+function launchConfetti() {
+  const colors = [
+    "#ff0000",
+    "#00ff00",
+    "#0000ff",
+    "#ffff00",
+    "#ff00ff",
+    "#00ffff",
+  ];
+  const confettiCount = 200;
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement("div");
+    confetti.style.position = "fixed";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = "-20px";
+    confetti.style.width = Math.random() * 10 + 5 + "px";
+    confetti.style.height = Math.random() * 5 + 3 + "px";
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.borderRadius = "2px";
+    confetti.style.zIndex = "1000";
+    document.body.appendChild(confetti);
+
+    // Animation
+    const duration = Math.random() * 3 + 2;
+    const rotation = Math.random() * 360;
+
+    confetti.animate(
+      [
+        {
+          transform: `translate(0, 0) rotate(0deg)`,
+          opacity: 1,
+        },
+        {
+          transform: `translate(${Math.random() * 200 - 100}px, ${
+            window.innerHeight + 100
+          }px) rotate(${rotation}deg)`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: duration * 1000,
+        easing: "cubic-bezier(0, .9, .57, 1)",
+        fill: "forwards",
+      }
+    );
+
+    // Remove after animation completes
+    setTimeout(() => {
+      confetti.remove();
+    }, duration * 1000);
+  }
+}
