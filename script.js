@@ -130,7 +130,7 @@ HTTP/3 socket (Though fun to see UDP making a comeback in a big way)
     mobileOutput: `<pre>System hacked successfully.</pre>`,
     onExecute: function () {
       setTimeout(() => {
-        alert("I also enjoy security!");
+        alert("<script>alert('I also enjoy security!');</script>");
       }, 50);
     },
   },
