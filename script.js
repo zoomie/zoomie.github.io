@@ -51,16 +51,16 @@ Date:   Oct 2022 - Present
     Built a breached credentials database with 4 billion rows used to detect account hacking.
 
     Led projects on TLS fingerprinting, automating data science workloads 
-    and building devs' internal tooling
+    and building devs' internal tooling.
 
 commit 3e4f5c6
 Company: Prolific
 Date:   May 2021 - Sep 2022
 
     Built out the public API and onboarded engineering teams including 
-    Google DeepMind
+    Google DeepMind.
 
-    Implemented 2-factor authentication from scratch
+    Implemented 2-factor authentication from scratch.
 
 commit 1a2b3c4
 Company: Navenio
@@ -69,20 +69,20 @@ Date:   Nov 2018 - Apr 2021
     Part of a team building a hospital efficiency app which used Wi-Fi routers to 
     localise cell phones.
 
-    Built notification system and analytics download system</pre>`,
+    Built notification system and analytics download system.</pre>`,
     mobileOutput: `<pre>Ravelin (2022-Present)
-• Distributed locking for SQL on multi-tenant DB
-• Breached credentials DB (4 billion rows)
-• TLS fingerprinting
-• Data science automation
+• Distributed locking for SQL on multi-tenant DB.
+• Breached credentials DB (4 billion rows).
+• TLS fingerprinting.
+• Data science automation.
 
 Prolific (2021-2022)
-• Public API development
-• 2FA implementation
+• Public API development.
+• 2FA implementation.
 
 Navenio (2018-2021)
-• Hospital efficiency app using Wi-Fi localization
-• Notifications & analytics</pre>`,
+• Hospital efficiency app using Wi-Fi localization.
+• Notifications & analytics.</pre>`,
   },
   {
     command: 'echo "Connect with me:"',
