@@ -40,17 +40,19 @@ drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
   },
   {
     command: "git log -- experience.txt",
-    desktopOutput: `<pre>commit 8a71f92d3b4e5c6a0d1f2e3b4c5d6e7f8a9b0c1d
+    desktopOutput: `<pre>commit 8a71f92
 Company: Ravelin
 Date:   Oct 2022 - Present
 
-    Built a SQL execution locking mechanism for a multi-tenant database 
-    and a breached credentials database with 4B+ rows
+    Built a distributed locking mechanism for SQL execution on multi-tenant database, 
+    served high-profile clients such as Spotify.
+    
+    Built a breached credentials database with 4 billion rows used to detect account hacking.
 
     Led projects on TLS fingerprinting, automating data science workloads 
     and building devs' internal tooling
 
-commit 3e4f5c6d7b8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c
+commit 3e4f5c6
 Company: Prolific
 Date:   May 2021 - Sep 2022
 
@@ -59,13 +61,17 @@ Date:   May 2021 - Sep 2022
 
     Implemented 2-factor authentication from scratch
 
-commit 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t
+commit 1a2b3c4
 Company: Navenio
 Date:   Nov 2018 - Apr 2021
 
+    Part of a team building a hospital efficiency app which used Wi-Fi routers to 
+    localise cell phones.
+
     Built notification system and analytics download system</pre>`,
     mobileOutput: `<pre>Ravelin (2022-Present)
-• SQL locking for multi-tenant DB
+• Distributed locking for SQL on multi-tenant DB
+• Breached credentials DB (4 billion rows)
 • TLS fingerprinting
 • Data science automation
 
@@ -74,6 +80,7 @@ Prolific (2021-2022)
 • 2FA implementation
 
 Navenio (2018-2021)
+• Hospital efficiency app using Wi-Fi localization
 • Notifications & analytics</pre>`,
   },
   {
@@ -89,7 +96,7 @@ Navenio (2018-2021)
   {
     command: "git log --reverse --max-parents=0 HEAD",
     desktopOutput: `<pre>
-commit 33fd28d321e540b8e391b52f47b597b7e78f5597
+commit 33fd28d
 Author: zoomie <andrew.arderne@pm.me>
 Date:   Sat March 12 15:31:01 2015
 
@@ -97,12 +104,7 @@ Date:   Sat March 12 15:31:01 2015
 </pre>`,
   },
   {
-    command: `date -j -f "%a %B %d %T %Y" "Sat March 12 15:31:01 2015" +%s`,
-    desktopOutput: `<pre>1426174261</pre>`,
-  },
-  {
-    command:
-      'echo "Andrew has been programming for $(( ($(date +%s) - 1426174261) / 31556952 )) years"',
+    command: `echo "Andrew has been programming for $(( ($(date +%s) - $(date -j -f "%a %B %d %T %Y" "Sat March 12 15:31:01 2015" +%s)) / 31556952 )) years"`,
     desktopOutput: `<pre>Andrew has been programming for 10 years
 </pre>`,
   },
