@@ -630,6 +630,7 @@ body {
     background-position: 75% 25%;
     background-repeat: no-repeat;
     border: 2px solid black;
+    opacity: 0.9;
 }
 
 .with-image {
