@@ -613,8 +613,8 @@ body {
 
 .embedded-image {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 52%;
+    top: 190%;
     transform: translate(-50%, -50%);
     z-index: 1;
     pointer-events: none;
@@ -624,10 +624,10 @@ body {
     width: 300px;
     height: 200px;
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     background-image: url('headshot.jpeg');
     background-size: cover;
-    background-position: center;
+    background-position: 75% 25%;
     background-repeat: no-repeat;
     border: 2px solid black;
 }
