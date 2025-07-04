@@ -1,3 +1,57 @@
+// View Toggle Functionality
+const viewToggle = document.getElementById("view-toggle");
+const logoToggle = document.getElementById("logo-toggle");
+const terminalView = document.getElementById("terminal-view");
+const alternateView = document.getElementById("alternate-view");
+
+let currentView = "terminal"; // Track current view
+
+function switchView() {
+  const toggleText = viewToggle.querySelector(".toggle-text");
+
+  if (currentView === "terminal") {
+    // Switch to alternate view
+    terminalView.classList.remove("active");
+    alternateView.classList.add("active");
+    currentView = "alternate";
+    viewToggle.setAttribute("title", "Switch to Terminal");
+    toggleText.textContent = "I'm a coder";
+  } else {
+    // Switch to terminal view
+    alternateView.classList.remove("active");
+    terminalView.classList.add("active");
+    currentView = "terminal";
+    viewToggle.setAttribute("title", "Switch View");
+    toggleText.textContent = "I don't code!";
+  }
+}
+
+// Add event listener to toggle button
+if (viewToggle) {
+  viewToggle.addEventListener("click", switchView);
+
+  // Also allow keyboard navigation
+  viewToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      switchView();
+    }
+  });
+}
+
+// Add event listener to logo toggle
+if (logoToggle) {
+  logoToggle.addEventListener("click", switchView);
+
+  // Also allow keyboard navigation
+  logoToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      switchView();
+    }
+  });
+}
+
 const terminal = document.getElementById("terminal");
 const executeButton = document.getElementById("execute-button");
 const progressBar = document.getElementById("progress-bar");
