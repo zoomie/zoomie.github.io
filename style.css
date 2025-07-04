@@ -547,6 +547,7 @@ body {
 /* Filter Navigation */
 .filter-nav {
     padding: 1.5rem 2rem;
+    padding-left: calc(15% + 2rem);
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
@@ -582,6 +583,7 @@ body {
 /* Main Content */
 .memory-main {
     padding: 3rem 2rem;
+    padding-left: calc(15% + 2rem);
     position: relative;
 }
 
@@ -677,6 +679,7 @@ body {
 /* Footer */
 .memory-footer {
     padding: 1.5rem 2rem;
+    padding-left: calc(15% + 2rem);
     text-align: center;
 }
 
@@ -766,7 +769,7 @@ body {
     line-height: 1.6;
     margin: 0;
     color: rgba(0, 0, 0, 0.8);
-    max-width: 50ch;
+    max-width: 60ch;
 }
 
 /* Mobile responsiveness */
@@ -810,6 +813,7 @@ body {
     
         .filter-nav {
         padding: 1rem;
+        padding-left: calc(5% + 1rem);
         gap: 1rem;
         justify-content: center;
     }
@@ -825,6 +829,7 @@ body {
     
     .memory-main {
         padding: 2rem 1rem;
+        padding-left: calc(5% + 1rem);
     }
     
     .big-text {
@@ -871,6 +876,7 @@ body {
     
     .memory-footer {
         padding: 1rem;
+        padding-left: calc(5% + 1rem);
     }
     
     .memory-footer p {
@@ -916,6 +922,6 @@ body {
     
     .job p {
         font-size: 0.9rem;
-        max-width: 50ch;
+        max-width: 60ch;
     }
 }
