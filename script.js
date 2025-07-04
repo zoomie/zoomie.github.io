@@ -4,7 +4,7 @@ const logoToggle = document.getElementById("logo-toggle");
 const terminalView = document.getElementById("terminal-view");
 const alternateView = document.getElementById("alternate-view");
 
-let currentView = "terminal"; // Track current view
+let currentView = "alternate"; // Track current view (matches default HTML state)
 
 function switchView() {
   const toggleText = viewToggle.querySelector(".toggle-text");
