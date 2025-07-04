@@ -574,6 +574,11 @@ body {
     min-width: 120px;
 }
 
+/* CV Section Filter Navigation - Remove left padding */
+.cv-section .filter-nav {
+    padding-left: 0;
+}
+
 /* Main Content */
 .memory-main {
     padding: 3rem 2rem;
@@ -800,12 +805,17 @@ body {
         margin: 0 1rem;
     }
     
-    .filter-nav {
+        .filter-nav {
         padding: 1rem;
         gap: 1rem;
         justify-content: center;
     }
-    
+
+    /* CV Section Filter Navigation - Remove left padding on mobile */
+    .cv-section .filter-nav {
+        padding-left: 0;
+    }
+
     .filter-item {
         min-width: 120px;
     }
