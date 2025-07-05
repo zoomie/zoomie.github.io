@@ -502,7 +502,8 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 0;
+    border: 2px solid black;
     user-select: none;
 }
 
@@ -644,7 +645,7 @@ body {
 .years-badge {
     position: absolute;
     left: -2rem;
-    top: 25.5rem;
+    top: 31rem;
     transform: rotate(-90deg);
     transform-origin: left top;
     z-index: 10;
@@ -676,10 +677,95 @@ body {
     margin: 0;
 }
 
+/* Breathing Room */
+.breathing-room {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
 /* CV Sections */
 .cv-section {
-    margin-top: 8rem;
+    margin-top: 10rem;
     /* margin-bottom: 3rem; */
+}
+
+/* Two Column Layout */
+.cv-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 8rem;
+}
+
+.cv-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.cv-column .cv-section {
+    margin-top: 0;
+}
+
+.cv-column .cv-section:not(:first-child) {
+    margin-top: 10rem;
+}
+
+/* Contact section spacing */
+.cv-column p {
+    margin-top: 6rem;
+}
+
+/* Social Links Section */
+.social-links-section {
+    margin-top: 10rem;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+
+.social-links-section a {
+    color: black;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.social-links-section a:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+/* Motto Navigation */
+.motto-nav {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Languages Grid */
+.languages-grid {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Filter Box */
+.filter-box {
+    background: rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.filter-box:hover {
+    background: black;
+    color: #E6A853;
+    transform: translateY(-2px);
 }
 
 
@@ -813,6 +899,11 @@ body {
         padding: 2rem 1rem;
         padding-left: calc(5% + 1rem);
     }
+
+    .breathing-room {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
     
     .big-text {
         font-size: clamp(2rem, 15vw, 4rem);
@@ -882,13 +973,52 @@ body {
     
     /* CV Sections Mobile */
     .cv-section {
-        margin-top: 2rem;
+        margin-top: 6rem;
         margin-bottom: 2rem;
     }
     
     .cv-section h2 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
+    }
+
+    /* Two Column Layout Mobile */
+    .cv-two-column {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .cv-column .cv-section:not(:first-child) {
+        margin-top: 6rem;
+    }
+
+    /* Contact section spacing mobile */
+    .cv-column p {
+        margin-top: 4rem;
+    }
+
+    /* Social Links Section Mobile */
+    .social-links-section {
+        margin-top: 6rem;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-links-section a {
+        font-size: 0.9rem;
+    }
+
+    /* Motto Navigation Mobile */
+    .motto-nav {
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* Languages Grid Mobile */
+    .languages-grid {
+        gap: 1rem;
+        justify-content: center;
     }
     
     .skills-grid {
