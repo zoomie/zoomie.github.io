@@ -564,14 +564,15 @@ body {
     font-size: 0.875rem;
 }
 
-.filter-box {
-    border: 1px solid black;
-    padding: 0.25rem 0.75rem;
+.filter-line {
+    border-top: 2px solid black;
+    padding: 0.25rem 0;
     min-width: 80px;
     font-size: 0.875rem;
+    display: inline-block;
 }
 
-.filter-box.wide {
+.filter-line.wide {
     min-width: 120px;
 }
 
@@ -845,6 +846,13 @@ body {
         align-items: flex-start;
         gap: 0.5rem;
         margin-bottom: 1rem;
+    }
+
+    /* Center the first two typography rows on mobile */
+    .typography-row:nth-child(1),
+    .typography-row:nth-child(2) {
+        align-items: center;
+        text-align: center;
     }
     
     .typography-row.outlined {
