@@ -671,16 +671,17 @@ body {
     padding: 0.25rem 0.5rem;
 }
 
-/* Footer */
-.memory-footer {
-    padding: 8rem 2rem 6rem;
-    padding-left: calc(15% + 2rem);
-    text-align: center;
+.bottom-divider {
+    height: 1px;
+    background: black;
+    margin: 0 2rem;
+    margin-top: 8rem;
+    margin-bottom: 4rem;
 }
 
-.memory-footer p {
-    font-size: 0.875rem;
-    margin: 0;
+
+.crazy-long-padding {
+    padding-top: 300rem;
 }
 
 /* Breathing Room */
