@@ -494,7 +494,7 @@ body {
 }
 
 .memory-logo span {
-    font-size: 1.125rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
@@ -511,23 +511,10 @@ body {
     transform: scale(1.05);
 }
 
-.memory-title {
-    text-align: center;
-}
-
-.memory-title h1 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-.memory-title p {
-    font-size: 0.875rem;
-    margin: 0;
-}
 
 .memory-nav a {
-    font-size: 1.125rem;
+    /* font-size: 1.125rem; */
+    font-size: 0.875rem;
     font-weight: 500;
     color: black;
     text-decoration: none;
@@ -695,12 +682,6 @@ body {
     /* margin-bottom: 3rem; */
 }
 
-.cv-section h2 {
-    font-size: 2rem;
-    /* font-weight: bold; */
-    /* margin: 0 0 1rem 0; */
-    color: black;
-}
 
 /* Skills Grid */
 .skills-grid {
@@ -714,7 +695,7 @@ body {
     background: rgba(0, 0, 0, 0.1);
     border: 2px solid black;
     padding: 1rem 2rem;
-    font-size: 1.2rem;
+    font-size: 0.875rem;
     font-weight: 600;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -758,7 +739,7 @@ body {
 }
 
 .period {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.7);
     display: block;
@@ -766,7 +747,7 @@ body {
 }
 
 .job p {
-    font-size: 1rem;
+    font-size: 0.875rem;
     line-height: 1.6;
     margin: 0;
     color: rgba(0, 0, 0, 0.8);
