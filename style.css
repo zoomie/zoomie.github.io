@@ -709,7 +709,7 @@ body {
     display: block;
     margin: 0 auto;
     margin-bottom: 4rem;
-    max-width: 300px;
+    max-width: 600px;
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -1179,6 +1179,6 @@ body {
 
     /* Large gif mobile */
     .large-gif {
-        max-width: 250px;
+        max-width: 500px;
     }
 }
