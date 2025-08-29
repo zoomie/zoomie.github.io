@@ -3,33 +3,200 @@
     <head>
         <title>Andrew's Terminal</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="loading-overlay" class="loading-overlay">
-            <div class="spinner"></div>
-            <div class="loading-text">Starting mac...</div>
-        </div>
-        <div class="background-container"></div>
-        <div class="terminal-container">
-            <div class="terminal-window">
-                <div class="title-bar">
-                    <div class="traffic-lights">
-                        <div class="traffic-light close"></div>
-                        <div class="traffic-light minimize"></div>
-                        <div class="traffic-light zoom"></div>
-                    </div>
-                    <div class="title-text">andrew@andrew-Mac:~</div>
-                </div>
-                <div class="progress-container">
-                    <div id="progress-bar" class="progress-bar"></div>
-                </div>
-                <div id="terminal"></div>
+        <!-- Terminal View -->
+        <div id="terminal-view" class="view-container">
+            <div id="loading-overlay" class="loading-overlay">
+                <div class="spinner"></div>
+                <div class="loading-text">Starting mac...</div>
             </div>
-            <button id="execute-button" tabindex="0">
-                Press <span class="keyboard-icon">Enter</span>
-            </button>
+            <div class="background-container"></div>
+            <div class="terminal-container">
+                <div class="terminal-window">
+                    <div class="title-bar">
+                        <div class="traffic-lights">
+                            <div class="traffic-light close"></div>
+                            <div class="traffic-light minimize"></div>
+                            <div class="traffic-light zoom"></div>
+                        </div>
+                        <div class="title-text">andrew@andrew-Mac:~</div>
+                    </div>
+                    <div class="progress-container">
+                        <div id="progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="terminal"></div>
+                </div>
+                <button id="execute-button" tabindex="0">
+                    Press <span class="keyboard-icon">Enter</span>
+                </button>
+                <!-- Toggle Button -->
+                <button id="view-toggle" class="view-toggle" title="Switch View">
+                    <span class="toggle-text">Design View</span>
+                </button>
+            </div>
         </div>
+
+        <!-- Design View (default) -->
+        <div id="alternate-view" class="view-container alternate active">
+            <div class="memory-library">
+                <!-- Header -->
+                <header class="memory-header">
+                    <div class="memory-logo">
+                        <span id="logo-toggle" class="logo-toggle" tabindex="0" role="button" title="Switch to Terminal">ButICode()</span>
+                    </div>
+
+                    <nav class="memory-nav">
+                    <p>andrew.arderne@pm.me</p>
+                    </nav>
+                </header>
+
+                <!-- Divider Line -->
+                <div class="divider-line"></div>
+
+                <!-- Main Content Area -->
+                <main class="memory-main">
+                    <!-- Large Typography Layout -->
+                    <div class="typography-layout">
+                        <!-- First Row -->
+                        <div class="breathing-room">
+                        <div class="typography-row">
+                            <span class="big-text">ANDREW</span>
+                            <span class="big-text">ARDERNE</span>
+                        </div>
+
+                        <!-- Second Row with Image -->
+                        <div class="typography-row with-image">
+                            <span class="outline-text">SOFTWARE</span>
+                            <span class="outline-text">ENGINEER</span>
+                            
+                            <!-- Image Background -->
+                            <div class="embedded-image">
+                                <div class="image-background"></div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Third Row - Outlined Text -->
+                        <div class="typography-row outlined">
+                            <span class="outline-text">BUILDING</span>
+                            <!-- Years Badge -->
+                            <div class="years-badge">
+                                <div class="years-badge-content">
+                                    <span class="years-number">10</span>
+                                    <span class="years-text">Years</span>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Two Column Layout -->
+                        <div class="cv-two-column">
+                            <!-- Left Column - Experience -->
+                            <div class="cv-column left">
+                                <div class="cv-section">
+                                    <div class="experience-list">
+                                        <div class="job">
+                                            <h3>Tulo</h3>
+                                            <span class="period">Aug 2025 - Present</span>
+                                            <p>Coming soon...</p>
+                                        </div>
+                                        <div class="job">
+                                            <h3>Ravelin</h3>
+                                            <span class="period">Oct 2022 - Aug 2025</span>
+                                            <p>Built distributed locking mechanism for multi-tenant database, serving high-profile clients like Spotify. Created breached credentials database with 4 billion rows.</p>
+                                        </div>
+                                        <div class="job">
+                                            <h3>Prolific</h3>
+                                            <span class="period">May 2021 - Sep 2022</span>
+                                            <p>Built public API and onboarded engineering teams including Google DeepMind. Implemented 2-factor authentication from scratch.</p>
+                                        </div>
+                                        <div class="job">
+                                            <h3>Navenio</h3>
+                                            <span class="period">Nov 2018 - Apr 2021</span>
+                                            <p>Built hospital efficiency app using Wi-Fi localization. Developed notification system and analytics download system.</p>
+                                        </div>
+                                        <div class="job">
+                                            <h3>DataProphet</h3>
+                                            <span class="period">Apr 2018 - Jun 2018</span>
+                                            <p>Created an image processing pipeline for optical character recognition, i.e. getting digits from images. Built a tool to visualize the effectiveness of the ML models on specific images. Worked collaboratively in a large repository and gained valuable experience during code reviews.</p>
+                                        </div>
+                                        <div class="job">
+                                            <h3>GetSmarter</h3>
+                                            <span class="period">Jul 2017 - Jul 2017</span>
+                                            <p>Improved an ETL pipeline for customer interaction data, informing the data analytics team.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column - Motto and Languages -->
+                            <div class="cv-column right">
+                                <!-- Languages Section -->
+                                <div class="cv-section">
+                                    <nav class="motto-nav">
+                                        <div class="filter-item">
+                                            <span class="filter-label">Go</span>
+                                            <span class="filter-line">JavaScript</span>
+                                        </div>
+                                        <div class="filter-item">
+                                            <span class="filter-label">Clojure</span>
+                                            <span class="filter-line">Python</span>
+                                        </div>
+                                        <div class="filter-item">
+                                            <span class="filter-label">TypeScript</span>
+                                            <span class="filter-line"></span>
+                                        </div>
+                                    </nav>
+                                </div>
+
+                                
+                                <!-- Motto Section -->
+                                <div class="cv-section">
+                                    <nav class="motto-nav">
+                                        <div class="filter-item">
+                                            <span class="filter-label">build</span>
+                                            <span class="filter-line">people</span>
+                                        </div>
+                                        <div class="filter-item">
+                                            <span class="filter-label">software</span>
+                                            <span class="filter-line">enjoy</span>
+                                        </div>
+                                        <div class="filter-item">
+                                            <span class="filter-label">that</span>
+                                            <span class="filter-line"></span>
+                                        </div>
+                                    </nav>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+
+                <div class="bottom-divider"></div>
+                <!-- Footer -->
+                <footer class="memory-footer">
+                    <!-- Social Links Section -->
+                    <div class="social-links-section">
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/andrew-arderne/">LinkedIn</a>
+                            <a href="https://github.com/zoomie">GitHub</a>
+                        </div>
+                        <div class="diamond-icon"></div>
+
+                    <p class="crazy-long-padding">;)</p>
+                    </div>
+                </footer>   
+            </div>
+        </div>
+
         <script src="script.js"></script>
     </body>
 </html>

@@ -1,3 +1,103 @@
+// View Toggle Functionality
+const viewToggle = document.getElementById("view-toggle");
+const logoToggle = document.getElementById("logo-toggle");
+const terminalView = document.getElementById("terminal-view");
+const alternateView = document.getElementById("alternate-view");
+
+let currentView = "alternate"; // Track current view (matches default HTML state)
+
+// Terminal initialization function (extracted for reuse)
+function initializeTerminal() {
+  // Reset terminal state
+  const terminal = document.getElementById("terminal");
+  const progressBar = document.getElementById("progress-bar");
+  const executeButton = document.getElementById("execute-button");
+
+  terminal.innerHTML = "";
+  currentCommandIndex = 0;
+  currentPromptLine = null;
+  isTyping = false;
+  executeButton.disabled = false;
+  executeButton.style.display = "block";
+
+  // Reset progress bar
+  if (progressBar) {
+    progressBar.style.width = "0%";
+  }
+
+  // Add the first command and execute it
+  setTimeout(() => {
+    currentPromptLine = addLine(
+      `<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${commands[0].command}</span>`,
+      ""
+    );
+    executeCommand();
+  }, 100);
+}
+
+// Function to show loading overlay and initialize terminal
+function showLoadingAndInitialize() {
+  const loadingOverlay = document.getElementById("loading-overlay");
+
+  // Show loading overlay
+  loadingOverlay.classList.remove("hidden");
+
+  // Hide loading overlay after 1000ms and initialize terminal
+  setTimeout(() => {
+    loadingOverlay.classList.add("hidden");
+    initializeTerminal();
+  }, 1000);
+}
+
+function switchView() {
+  const toggleText = viewToggle.querySelector(".toggle-text");
+
+  if (currentView === "terminal") {
+    // Switch to alternate view
+    terminalView.classList.remove("active");
+    alternateView.classList.add("active");
+    currentView = "alternate";
+    viewToggle.setAttribute("title", "Switch to Terminal");
+    toggleText.textContent = "I'm a coder";
+  } else {
+    // Switch to terminal view
+    alternateView.classList.remove("active");
+    terminalView.classList.add("active");
+    currentView = "terminal";
+    viewToggle.setAttribute("title", "Switch View");
+    toggleText.textContent = "I don't code!";
+
+    // Show loading state and initialize terminal
+    showLoadingAndInitialize();
+  }
+}
+
+// Add event listener to toggle button
+if (viewToggle) {
+  viewToggle.addEventListener("click", switchView);
+
+  // Also allow keyboard navigation
+  viewToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      switchView();
+    }
+  });
+}
+
+// Add event listener to logo toggle
+if (logoToggle) {
+  logoToggle.addEventListener("click", switchView);
+
+  // Also allow keyboard navigation
+  logoToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      switchView();
+    }
+  });
+}
+
 const terminal = document.getElementById("terminal");
 const executeButton = document.getElementById("execute-button");
 const progressBar = document.getElementById("progress-bar");
@@ -329,28 +429,14 @@ executeButton.addEventListener("keydown", (event) => {
 window.addEventListener("load", () => {
   const loadingOverlay = document.getElementById("loading-overlay");
 
-  // Initialize progress bar to 0%
-  if (progressBar) {
-    progressBar.style.width = "0%";
-  }
-
-  // Hide loading overlay after 1000ms (1 second)
+  // Hide loading overlay after 1000ms (1 second) only on initial page load
   setTimeout(() => {
     loadingOverlay.classList.add("hidden");
-    // Remove the overlay from DOM after animation completes
-    setTimeout(() => loadingOverlay.remove(), 300);
-  }, 1000);
 
-  // Run the first command automatically after the loading overlay disappears
-  setTimeout(() => {
-    // Add the first command without a cursor since it will execute immediately
-    currentPromptLine = addLine(
-      `<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${commands[0].command}</span>`,
-      ""
-    );
-
-    // Execute it
-    executeCommand();
+    // Only initialize if we're starting on terminal view
+    if (currentView === "terminal") {
+      initializeTerminal();
+    }
   }, 1000);
 });
 
@@ -360,23 +446,10 @@ window.addEventListener("resize", () => {
   const currentDeviceType = isMobileDevice();
   if (currentDeviceType !== lastDeviceType) {
     lastDeviceType = currentDeviceType;
-    // Reset the terminal and restart from beginning
-    terminal.innerHTML = "";
-    currentCommandIndex = 0;
-    currentPromptLine = null;
-
-    // Reset progress bar
-    if (progressBar) {
-      progressBar.style.width = "0%";
+    // Re-initialize the terminal if we're currently on terminal view
+    if (currentView === "terminal") {
+      initializeTerminal();
     }
-
-    // Re-initialize the terminal
-    const firstCommand = commands[0].command;
-    currentPromptLine = addLine(
-      `<span class="arrow">→</span> <span class="directory">~</span> <span class="prompt">andrew</span> <span class="git-branch">git:(main)</span> <span class="command">${firstCommand}</span>`,
-      ""
-    );
-    executeCommand();
   }
 });
 
