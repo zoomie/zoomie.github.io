@@ -681,7 +681,39 @@ body {
 
 
 .crazy-long-padding {
-    padding-top: 300rem;
+    padding-top: 150rem;
+}
+
+/* Scroll Down Arrow */
+.scroll-arrow-container {
+    position: relative;
+    height: 0;
+    overflow: visible;
+}
+
+.scroll-down-arrow {
+    position: absolute;
+    left: 50%;
+    top: 75rem; /* Halfway through the 150rem padding */
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 18px solid black;
+    z-index: 10;
+}
+
+/* Large gif styling */
+.large-gif {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Breathing Room */
@@ -1136,5 +1168,17 @@ body {
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 10px solid black;
+    }
+
+    /* Scroll down arrow mobile */
+    .scroll-down-arrow {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 15px solid black;
+    }
+
+    /* Large gif mobile */
+    .large-gif {
+        max-width: 250px;
     }
 }
