@@ -141,9 +141,15 @@ drwxr-xr-x  3 andrew  staff  <span class="directory">..</span>
   },
   {
     command: "git log -- experience.txt",
-    desktopOutput: `<pre>commit 8a71f92
+    desktopOutput: `<pre>commit 9b82g03
+Company: Tulo
+Date:   Aug 2025 - Present
+
+    Making onchain accounting easy
+
+commit 8a71f92
 Company: Ravelin
-Date:   Oct 2022 - Present
+Date:   Oct 2022 - Aug 2025
 
     Built a distributed locking mechanism for SQL execution on multi-tenant database, 
     served high-profile clients such as Spotify.
@@ -170,7 +176,10 @@ Date:   Nov 2018 - Apr 2021
     localise cell phones.
 
     Built notification system and analytics download system.</pre>`,
-    mobileOutput: `<pre>Ravelin (2022-Present)
+    mobileOutput: `<pre>Tulo (Aug 2025 - Present)
+• Coming soon...
+
+Ravelin (Oct 2022 - Aug 2025)
 • Distributed locking for SQL on multi-tenant DB.
 • Breached credentials DB (4 billion rows).
 • TLS fingerprinting.
